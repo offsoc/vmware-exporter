@@ -16,7 +16,7 @@ before:
     - go generate ./...
 
 builds:
-  - id: linux-arm64
+  - id: linux
     main: ./
     binary: vmware-exporter
     env:
@@ -25,14 +25,6 @@ builds:
       - linux
     goarch:
       - arm64
-  - id: linux-amd64
-    main: ./
-    binary: vmware-exporter
-    env:
-      - CGO_ENABLED=0
-    goos:
-      - linux
-    goarch:
       - amd64
   - id: windows
     main: ./
@@ -43,13 +35,11 @@ builds:
       - windows
     goarch:
       - amd64
-      - arm64
 
 archives:
-  - id: vmware-exporter-comman
+  - id: vmware-exporter
     builds:
-      - linux-amd64
-      - linux-arm64
+      - linux
       - windows
     format: tar.gz
     format_overrides:
