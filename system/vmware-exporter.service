@@ -1,0 +1,22 @@
+[Unit]
+Description=vmware-exporter is a simple prometheus exporter that collects various metrics from a vCenter.
+After=network.target
+
+[Service]
+Type=simple
+Restart=on-failure
+RestartSec=5
+EnvironmentFile=-/etc/vmware-exporter/vmware.conf
+ExecStart=/usr/bin/vmware-exporter -http.address=:9169 $ARGS
+ExecStop=/bin/kill -s SIGTERM $MAINPID
+ExecReload=/bin/kill -HUP $MAINPID
+ProtectSystem=full
+LimitNOFILE=1048576
+LimitNPROC=1048576
+LimitCORE=infinity
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=vmware-exporter
+
+[Install]
+WantedBy=multi-user.target

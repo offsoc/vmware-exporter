@@ -3,6 +3,7 @@
 
 This is a simple prometheus exporter that collects various metrics from a vCenter. 
 
+[中文文档](./README-zh.md)
 
 ## How to use
 
