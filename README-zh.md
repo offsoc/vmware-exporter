@@ -31,7 +31,7 @@ system 目录下的 vmware-exporter.service 文件需要放入 `/etc/systemd/sys
 ### Docker 运行
 
 - 前提：安装 Docker
-- Docker Compose 运行
+- Docker 运行
 
 ```bash
 docker run -d \
