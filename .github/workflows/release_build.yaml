@@ -1,14 +1,21 @@
-name: goreleaser
+name: Release with goreleaser
 
 on:
+  push:
+    branches:
+      - "!*"
+    tags:
+      - "v*.*.*"
+
+# on:
   # push:
   #   branches: [ "master" ]
   #   tags:
   #   - 'v[0-9]+.[0-9]+.[0-9]+'
-  release:
-    types:
-      - created   # 表示在创建新的 Release 时触发
-      # - published
+  # release:
+  #   types:
+  #     - created   # 表示在创建新的 Release 时触发
+  #     # - published
 
 permissions:
   contents: write
