@@ -45,9 +45,7 @@ func setLogger(lf, ll *string) *promlog.Config {
 }
 
 func usage() {
-	const s = `
-vmware-exporter collects metrics data from VMware vCenter. 
-`
+	const s = `vmware-exporter collects metrics data from VMware vCenter. `
 	config.Usage(s)
 }
 
