@@ -6,7 +6,27 @@
 当使用 /metcis 路径时，Exporter 会采集单个 vCenter 主机。 使用 /probe 可以抓取多个 vCenter 主机，但这些 vCenter 主机必须共享凭据（用户名和密码必须相同）。
 
 ### 二进制运行
-system 目录下的 vmware-exporter.service 文件需要放入 /etc/systemd/system/ 目录中，并可通过 systemctl 命令进行管理。
+
+下载二进制包，解压包，把二进制文件 vmware-exporter 放入到 `/usr/bin` 目录下，然后新建目录 `/etc/vmware-exporter/`
+
+```bash
+wget https://github.com/robotneo/vmware-exporter/releases/download/v0.1.12/vmware-exporter-v0.1.12-linux-amd64.tar.gz
+
+mkdir -pv /opt/vmware
+mkdir -pv /etc/vmware-exporter/
+
+tar -zxvf vmware-exporter-v0.1.12-linux-amd64.tar.gz -C /opt/vmware
+cd /opt/vmware
+mv vmware-exporter /usr/bin
+
+# 把 vmware.conf 文件放入 /etc/vmware-exporter/ 目录中，vmware.conf 通过命令行选项加载参数
+ARGS="-vmware.username=administrator@vsphere.local -vmware.password=public@123 -vmware.vcenter=172.16.10.1:443"
+# 更多参数 可通过空格进行添加 
+
+# 复制项目中 system 目录下的 vmware-exporter.service 文件到 /etc/systemd/system/ 目录中，实现 systemd 管理 vmware-exporter 服务。
+```
+
+system 目录下的 vmware-exporter.service 文件需要放入 `/etc/systemd/system/` 目录中，并可通过 systemctl 命令进行管理。
 
 ### Docker 运行
 
