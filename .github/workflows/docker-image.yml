@@ -27,7 +27,7 @@ jobs:
       with:
          context: .
          push: true
-         tags: prezhdarov/vmware-exporter:latest
+         tags: robotneo/vmware-exporter:latest
   
   
   build-version:
@@ -49,4 +49,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: prezhdarov/vmware-exporter:${{ github.ref_name }}
+        tags: robotneo/vmware-exporter:${{ github.ref_name }}
