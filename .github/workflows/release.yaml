@@ -1,25 +1,38 @@
-name: Auto Release
+name: build-go-binary
+
+# on:
+#   push:
+#     branches:
+#       - master
+#     tags:
+#       - v.*
 
 on:
-  push:
-    branches:
-      - master
-    tags:
-      - v.*
+  release:
+    types:
+    - created   # 表示在创建新的 Release 时触发
+    - published
+
 
 jobs:
-  goreleaser:
+  build-go-binary:
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        goos: [linux, windows, darwin] # 需要打包的系统
+        goarch: [amd64, arm64] # 需要打包的架构
+        exclude: # 排除某些平台和架构
+          - goarch: arm64
+            goos: windows
         go-version: [ '1.22.x' ]
 
     steps:
-      - uses: actions/checkout@v4
-      - name: Setup Go ${{ matrix.go-version }}
-        uses: actions/setup-go@v5
+      - uses: actions/checkout@v3
+      - uses: wangyoucao577/go-release-action@v1
         with:
-          go-version: ${{ matrix.go-version }}
-      # You can test your matrix by printing the current Go version
-      - name: Display Go version
-        run: go version
+          github_token: ${{ secrets.GITHUB_TOKEN }}   # 一个默认的变量，用来实现往 Release 中添加文件
+          goos: ${{ matrix.goos }}
+          goarch: ${{ matrix.goarch }}
+          goversion: ${{ matrix.go-version }}   # 可以指定编译使用的 Golang 版本
+          binary_name: "vmware-exporter"        # 可以指定二进制文件的名称
+          extra_files: README.md vmware.conf    # 需要包含的额外文件
