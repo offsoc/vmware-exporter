@@ -30,6 +30,21 @@ system 目录下的 vmware-exporter.service 文件需要放入 `/etc/systemd/sys
 
 ### Docker 运行
 
+- 前提：安装 Docker
+- Docker Compose 运行
+
+```bash
+docker run -d \
+  --name vmware-exporter \
+  --hostname vmware-exporter \
+  -p 9169:9169 \
+  meisite/vmware-exporter:latest \
+  -vmware.username=administrator@vsphere.local \
+  -vmware.password=public@123 \
+  -vmware.vcenter=172.16.10.1:443 \
+  -vmware.granularity=15 \
+  -vmware.interval=15
+```
 
 ## 参数设置
 

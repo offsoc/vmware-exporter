@@ -1,0 +1,14 @@
+services:
+  vmware-exporter:
+    image: meisite/vmware-exporter:latest
+    container_name: vmware-exporter
+    hostname: vmware-exporter
+    ports:
+      - 9169:9169
+    command:
+      - "-vmware.username=administrator@vsphere.local"
+      - "-vmware.password=QOo%zF7AsvJ280.s@sc"
+      - "-vmware.vcenter=172.17.41.101:443"
+      - "-vmware.granularity=15"
+      - "-vmware.interval=15"
+    restart: always
