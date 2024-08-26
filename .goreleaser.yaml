@@ -46,7 +46,7 @@ builds:
       - arm64
 
 archives:
-  - id: categraf-common
+  - id: vmware-exporter-comman
     builds:
       - linux-amd64
       - linux-arm64
