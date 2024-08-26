@@ -34,6 +34,7 @@ builds:
     goos:
       - windows
     goarch:
+      - arm64
       - amd64
 
 archives:
@@ -41,6 +42,7 @@ archives:
     builds:
       - linux
       - windows
+      - macos
     format: tar.gz
     format_overrides:
       - goos: windows
