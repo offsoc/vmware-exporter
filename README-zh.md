@@ -42,9 +42,11 @@ docker run -d \
   -vmware.username=administrator@vsphere.local \
   -vmware.password=public@123 \
   -vmware.vcenter=172.16.10.1:443 \
-  -vmware.granularity=15 \
-  -vmware.interval=15
+  -vmware.granularity=20 \
+  -vmware.interval=20
 ```
+
+说明下：-vmware.granularity 和 -vmware.interval 不能低于 20s ，这是由于vCenter的限制。
 
 ## 参数设置
 
