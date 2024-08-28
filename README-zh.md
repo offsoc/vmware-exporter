@@ -41,12 +41,33 @@ docker run -d \
   meisite/vmware-exporter:latest \
   -vmware.username=administrator@vsphere.local \
   -vmware.password=public@123 \
-  -vmware.vcenter=172.16.10.1:443 \
+  -vmware.vcenter=172.16.10.1 \
   -vmware.granularity=20 \
   -vmware.interval=20
 ```
 
 说明下：-vmware.granularity 和 -vmware.interval 不能低于 20s ，这是由于vCenter的限制。
+
+任务抓取配置：
+
+```yaml
+scrape_configs:
+  - job_name: "vmware-exporter"
+    scrape_interval: 20s
+    scrape_timeout: 15s
+    metrics_path: /metrics
+    # metrics_path: /probe
+    static_configs:
+      - targets:
+        - '172.16.10.1'
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: 172.16.10.100:9169
+```
 
 ## 参数设置
 
